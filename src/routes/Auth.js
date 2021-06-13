@@ -5,6 +5,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newAccount, setNewAccount] = useState(true);
+  const [error, setError] = useState("");
 
   const onChange = (event) => {
     const {
@@ -32,9 +33,11 @@ const Auth = () => {
       }
       console.log(data);
     } catch (e) {
-      console.log(e);
+      setError(e.message);
     }
   };
+  const toggleAccount = () => setNewAccount((prev) => !prev); //이전값의 반대값으로 리턴
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -56,6 +59,9 @@ const Auth = () => {
         />
         <input type="submit" value={newAccount ? "Create Account" : "Login"} />
       </form>
+      <span onClick={toggleAccount}>{newAccount ? "sign in" : "sign up"}</span>
+      {error}
+
       <div>
         <button>Continue with Google</button>
         <button>Continue with Github</button>
