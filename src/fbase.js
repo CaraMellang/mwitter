@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth"; //auth구현시 임포트 필요
+import "firebase/database";
 
 var firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
