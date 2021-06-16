@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
+import Mweet from '../components/Mweet'
 
 const Home = () => {
   const [mweet, setMweet] = useState("");
@@ -48,9 +49,7 @@ const Home = () => {
       <input type="submit" value="Mweet" onClick={onSubmit} />
       <div>
         {mweets.map((m) => (
-          <div key={m.id}>
-            <h4>{m.mweet}</h4>
-          </div>
+          <Mweet key={m.id} mweetObj={m} />
         ))}
       </div>
     </form>
