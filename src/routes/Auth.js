@@ -37,6 +37,9 @@ const Auth = () => {
     }
   };
   const toggleAccount = () => setNewAccount((prev) => !prev); //이전값의 반대값으로 리턴
+  //리액트는 setnames()에 매개를 함수형태로 작성하면
+  // prev(변수)로 전달된 이전값에 접근하게 해줌
+
   const onSocialClick = async (event) => {
     const {
       target: { name },

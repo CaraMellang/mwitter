@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { dbService } from "fbase";
-import Mweet from '../components/Mweet'
+import Mweet from "../components/Mweet";
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [mweet, setMweet] = useState("");
   const [mweets, setMweets] = useState([]);
-  const getMweets = async () => {
-    const dbMweets = await dbService.collection("mweets").get();
-    dbMweets.forEach((document) => {
-      const mweetObject = {
-        ...document.data(),
-        id: document.id,
-      };
-      setMweets((prev) => [mweetObject, ...prev]);
-      //리액트는 setnames()에 매개를 함수형태로 작성하면
-      // prev(변수)로 전달된 이전값에 접근하게 해줌
-    });
-  };
+
   useEffect(() => {
     //useEffect는 컴포넌트가 mount될 때 실행(클래스 didmount)
-    getMweets();
+    dbService.collection("mweets").onSnapshot((snap) => {
+      //onsnapshot은 실시간 감지해서 변화가있으면 자동호출
+      const mweetArray = snap.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setMweets(mweetArray);
+      console.log(mweetArray);
+    });
   }, []);
   const onChange = (e) => {
     const {
@@ -33,6 +30,7 @@ const Home = () => {
       //promise를 리턴하므로 async 사용
       mweet, //다큐먼트의 키. mweet: mweet 변수명과 같으므로 한단어로 생략
       createAt: Date.now(),
+      creatorId: userObj.uid,
     });
     setMweet("");
   };
