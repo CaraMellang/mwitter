@@ -28,7 +28,8 @@ const Home = ({ userObj }) => {
     event.preventDefault();
     await dbService.collection("mweets").add({
       //promise를 리턴하므로 async 사용
-      mweet, //다큐먼트의 키. mweet: mweet 변수명과 같으므로 한단어로 생략
+      // mweet, //다큐먼트의 키. mweet: mweet 변수명과 밸류가 같으면 한단어로 생략
+      text: mweet,
       createAt: Date.now(),
       creatorId: userObj.uid,
     });
@@ -36,21 +37,27 @@ const Home = ({ userObj }) => {
   };
   console.log(mweets);
   return (
-    <form>
-      <input
-        type="text"
-        placeholder="what's on your mind"
-        maxLength={120}
-        value={mweet}
-        onChange={onChange}
-      />
-      <input type="submit" value="Mweet" onClick={onSubmit} />
+    <>
+      <form>
+        <input
+          type="text"
+          placeholder="what's on your mind"
+          maxLength={120}
+          value={mweet}
+          onChange={onChange}
+        />
+        <input type="submit" value="Mweet" onClick={onSubmit} />
+      </form>
       <div>
         {mweets.map((m) => (
-          <Mweet key={m.id} mweetObj={m} />
+          <Mweet
+            key={m.id}
+            mweetObj={m}
+            isOwner={m.creatorId === userObj.uid}
+          />
         ))}
       </div>
-    </form>
+    </>
   );
 };
 
