@@ -5,6 +5,7 @@ import Mweet from "../components/Mweet";
 const Home = ({ userObj }) => {
   const [mweet, setMweet] = useState("");
   const [mweets, setMweets] = useState([]);
+  const [attachment, setAttachment] = useState();
 
   useEffect(() => {
     //useEffect는 컴포넌트가 mount될 때 실행(클래스 didmount)
@@ -35,7 +36,25 @@ const Home = ({ userObj }) => {
     });
     setMweet("");
   };
-  console.log(mweets);
+  const onFileChange = (event) => {
+    // console.log(event.target.files);
+    const {
+      target: { files },
+    } = event;
+    const theFile = files[0];
+    const reader = new FileReader();
+    reader.onloadend = (finishedEvent) => {
+      // 파일 로딩이 끝나면 finishedEvent를 받음(onloadend)
+      const {
+        currentTarget: { result },
+      } = finishedEvent;
+      console.log(finishedEvent);
+      setAttachment(result);
+    };
+    reader.readAsDataURL(theFile); //파일 데이터를 얻음(result가 이미지 데이터(currnetTarget -> result))
+  };
+
+  const onClearAttachment = () => setAttachment(null);
   return (
     <>
       <form>
@@ -46,7 +65,14 @@ const Home = ({ userObj }) => {
           value={mweet}
           onChange={onChange}
         />
+        <input type="file" accept="imaga/*" onChange={onFileChange} />
         <input type="submit" value="Mweet" onClick={onSubmit} />
+        {attachment && (
+          <div>
+            <img src={attachment} width="50px" height="50px" />
+            <button onClick={onClearAttachment}>Clear</button>
+          </div>
+        )}
       </form>
       <div>
         {mweets.map((m) => (

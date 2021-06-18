@@ -27,7 +27,6 @@ function App() {
       ) : (
         "initializing..."
       )}
-      <footer>this is footer</footer>
     </>
   );
 }
