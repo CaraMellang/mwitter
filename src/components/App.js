@@ -4,17 +4,18 @@ import { authService } from "../fbase";
 
 function App() {
   const [init, setInit] = useState(false);
-  const [isLoggedin, setIsLoggedin] = useState(authService.currentUser); //유저 로그인 여부 확인가능
+  // const [isLoggedin, setIsLoggedin] = useState(authService.currentUser); //유저 로그인 여부 확인가능
   const [userObj, setUserObj] = useState(null);
   useEffect(() => {
     authService.onAuthStateChanged((user) => {
-      //authservice가 바뀌면 유져상태체인지가 호출
+      //authservice가 바뀌면 유져상태체인지가 호출(로그인,로그아웃시 호출)
       if (user) {
-        setIsLoggedin(true);
+        // setIsLoggedin(true);
         setUserObj(user); // 유저값을 넣음
-      } else {
-        setIsLoggedin(false);
       }
+      // else {
+      //   setIsLoggedin(false);
+      // }
       setInit(true);
     });
   }, []);
@@ -22,10 +23,7 @@ function App() {
   return (
     <>
       {init ? (
-        <AppRouter
-          isLoggedin={isLoggedin}
-          userObj={userObj}
-        />
+        <AppRouter isLoggedin={Boolean(userObj)} userObj={userObj} />
       ) : (
         "initializing..."
       )}

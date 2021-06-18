@@ -9,7 +9,7 @@ const Home = ({ userObj }) => {
   useEffect(() => {
     //useEffect는 컴포넌트가 mount될 때 실행(클래스 didmount)
     dbService.collection("mweets").onSnapshot((snap) => {
-      //onsnapshot은 실시간 감지해서 변화가있으면 자동호출
+      //onsnapshot은 리스너로, DB를 실시간 감지해서 변화가있으면 자동호출
       const mweetArray = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
