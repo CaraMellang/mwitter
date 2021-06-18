@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
+import { v4 as uuidv4 } from "uuid";
 import Mweet from "../components/Mweet";
 
 const Home = ({ userObj }) => {
@@ -27,13 +28,16 @@ const Home = ({ userObj }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("mweets").add({
-      //promise를 리턴하므로 async 사용
-      // mweet, //다큐먼트의 키. mweet: mweet 변수명과 밸류가 같으면 한단어로 생략
-      text: mweet,
-      createAt: Date.now(),
-      creatorId: userObj.uid,
-    });
+    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`); //파일에 대한 reference를 생성
+    const response = await fileRef.putString(attachment, "data_url");
+    console.log(response);
+    // await dbService.collection("mweets").add({
+    //   //promise를 리턴하므로 async 사용
+    //   // mweet, //다큐먼트의 키. mweet: mweet 변수명과 밸류가 같으면 한단어로 생략
+    //   text: mweet,
+    //   createAt: Date.now(),
+    //   creatorId: userObj.uid,
+    // });
     setMweet("");
   };
   const onFileChange = (event) => {

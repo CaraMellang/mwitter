@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth"; //auth구현시 임포트 필요
 import "firebase/firestore";
+import "firebase/storage";
 
 var firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -17,3 +18,4 @@ export const firebaseInstance = firebase;
 
 export const authService = firebase.auth();
 export const dbService = firebase.firestore();
+export const storageService = firebase.storage();
