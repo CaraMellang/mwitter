@@ -1,4 +1,4 @@
-import { dbService } from "fbase";
+import { dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
 
 const Mweet = ({ mweetObj, isOwner }) => {
@@ -9,6 +9,8 @@ const Mweet = ({ mweetObj, isOwner }) => {
     if (ok) {
       await dbService.doc(`mweets/${mweetObj.id}`).delete();
       //doc()의 documentpath인자는 데이터베이스의 폴더형식으로
+      await storageService.refFromURL(mweetObj.attachmentUrl).delete();
+      //스토리지에 있는 사진삭제
     }
   };
   const toggleEditing = () => {
