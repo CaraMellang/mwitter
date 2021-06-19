@@ -6,7 +6,7 @@ import Mweet from "../components/Mweet";
 const Home = ({ userObj }) => {
   const [mweet, setMweet] = useState("");
   const [mweets, setMweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     //useEffect는 컴포넌트가 mount될 때 실행(클래스 didmount)
@@ -28,9 +28,25 @@ const Home = ({ userObj }) => {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    const fileRef = storageService.ref().child(`${userObj.uid}/${uuidv4()}`); //파일에 대한 reference를 생성
-    const response = await fileRef.putString(attachment, "data_url");
-    console.log(response);
+    let attachmentUrl = "";
+    if (attachment != "") {
+      const attachmentRef = storageService
+        .ref()
+        .child(`${userObj.uid}/${uuidv4()}`); //파일에 대한 reference를 생성
+      const response = await attachmentRef.putString(attachment, "data_url");
+      attachmentUrl = await response.ref.getDownloadURL();
+      //getDownloadURL은 promise를 리턴(promise는 쉽게말해 기다리라는 의미)
+    }
+    const mweetObj = {
+      text: mweet,
+      createAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
+    await dbService.collection("mweets").add(mweetObj);
+    setMweet("");
+    setAttachment("");
+
     // await dbService.collection("mweets").add({
     //   //promise를 리턴하므로 async 사용
     //   // mweet, //다큐먼트의 키. mweet: mweet 변수명과 밸류가 같으면 한단어로 생략
@@ -38,7 +54,7 @@ const Home = ({ userObj }) => {
     //   createAt: Date.now(),
     //   creatorId: userObj.uid,
     // });
-    setMweet("");
+    // setMweet("");
   };
   const onFileChange = (event) => {
     // console.log(event.target.files);
@@ -58,7 +74,7 @@ const Home = ({ userObj }) => {
     reader.readAsDataURL(theFile); //파일 데이터를 얻음(result가 이미지 데이터(currnetTarget -> result))
   };
 
-  const onClearAttachment = () => setAttachment(null);
+  const onClearAttachment = () => setAttachment("");
   return (
     <>
       <form>
