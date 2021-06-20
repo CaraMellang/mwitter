@@ -32,7 +32,7 @@ const Home = ({ userObj }) => {
     if (attachment !== "") {
       const attachmentRef = storageService
         .ref()
-        .child(`${userObj.uid}/${uuidv4()}`); //파일에 대한 reference를 생성
+        .child(`${userObj.uid}/${uuidv4()}`); //파일에 대한 reference로 참조
       const response = await attachmentRef.putString(attachment, "data_url");
       attachmentUrl = await response.ref.getDownloadURL();
       //getDownloadURL은 promise를 리턴(promise는 쉽게말해 기다리라는 의미)

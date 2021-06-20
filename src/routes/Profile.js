@@ -2,14 +2,14 @@ import { authService, dbService } from "fbase";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, refreshUser }) => {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   const onLogOutClick = () => {
     authService.signOut();
-    // history.push("/");
+    history.push("/");
     // 이친구는 클라이언트단에서 url을 변경한 것 "처럼"보이게함
-    window.location.replace("/"); //따라서 리프레쉬하는 이걸사용
+    // window.location.replace("/"); //따라서 리프레쉬하는 이걸사용
   };
   const getMyMweets = async () => {
     const mweets = await dbService
@@ -40,6 +40,7 @@ const Profile = ({ userObj }) => {
         //(다른것도 쓰려면 다른 메소드 써야함)
         displayName: newDisplayName,
       });
+      refreshUser();
     }
   };
   return (
