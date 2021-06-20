@@ -13,7 +13,7 @@ import Navigation from "./Navigation";
 const AppRouter = ({ isLoggedin, userObj }) => {
   return (
     <Router>
-      {isLoggedin && <Navigation />}
+      {isLoggedin && <Navigation userObj={userObj} />}
       <Switch>
         {isLoggedin ? (
           <>
@@ -21,7 +21,7 @@ const AppRouter = ({ isLoggedin, userObj }) => {
               <Home userObj={userObj} />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userObj={userObj} />
             </Route>
             {/* <Redirect from="*" to="/" />
             이외의 다른 url 주소를 "/"로 리다이렉트함 */}
