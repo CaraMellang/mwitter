@@ -17,10 +17,10 @@ function App() {
           uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         });
+      } else {
+        //얘 쓰면 리프레쉬 없이 바로 로그아웃
+        setUserObj(null);
       }
-      // else{//얘 쓰면 리프레쉬 없이 바로 로그아웃
-      //   setUserObj(null)
-      // }
       // else {
       //   setIsLoggedin(false);
       // }
