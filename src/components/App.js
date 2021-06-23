@@ -32,7 +32,7 @@ function App() {
     console.log(authService.currentUser);
     //데이터가 크므로 리액트가 판단하기 복잡해서 바로 변화가 이뤄지지못함
     //방법 1) object의 크기를 줄여줌(uid, updateProfile ,didplayName)
-    //방법 2) 버그많은 안씀
+    //방법 2) 버그많음 안씀
     const user = authService.currentUser;
     setUserObj({
       displayName: user.displayName,

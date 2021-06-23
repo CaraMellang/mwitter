@@ -1,5 +1,7 @@
 import { dbService, storageService } from "fbase";
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Mweet = ({ mweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -31,32 +33,37 @@ const Mweet = ({ mweetObj, isOwner }) => {
     setEditing(false);
   };
   return (
-    <div>
+    <div className="mweet">
       {editing ? (
         <>
-          <form onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="container mweetEdit">
             <input
               type="text"
               value={newMweet}
               placeholder="Edit your mweet"
               onChange={onChange}
               required
+              autoFocus
+              className="formInput"
             />
-            <input type="submit" value="Update Mweet" />
+            <input type="submit" value="Update Mweet" className="formBtn" />
           </form>
-          <button onClick={toggleEditing}>cancel</button>
+          <button onClick={toggleEditing} className="formBtn cancelBtn">cancel</button>
         </>
       ) : (
         <>
           <h4>{mweetObj.text}</h4>
-          {mweetObj.attachmentUrl && (
-            <img src={mweetObj.attachmentUrl} width="50ox" height="50ox" />
-          )}
+          {mweetObj.attachmentUrl && <img src={mweetObj.attachmentUrl} />}
+
           {isOwner && (
-            <>
-              <button onClick={onDeleteClick}>Delete</button>
-              <button onClick={toggleEditing}>Edit</button>
-            </>
+            <div>
+            <span onClick={onDeleteClick}>
+              <FontAwesomeIcon icon={faTrash} />
+            </span>
+              <span onClick={toggleEditing}>
+                <FontAwesomeIcon icon={faPencilAlt}/>
+              </span>
+            </div>
           )}
         </>
       )}

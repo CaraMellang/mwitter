@@ -41,7 +41,7 @@ const AuthForm = () => {
   // prev(변수)로 전달된 이전값에 접근하게 해줌
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="container">
         <input
           name="email"
           type="email"
@@ -49,6 +49,7 @@ const AuthForm = () => {
           required
           value={email}
           onChange={onChange}
+          className="authInput"
         />
         <input
           name="password"
@@ -57,16 +58,22 @@ const AuthForm = () => {
           required
           value={password}
           onChange={onChange}
+          className="authInput"
         />
-        <input type="submit" value={newAccount ? "Create Account" : "Login"} />
+        <input
+          type="submit"
+          className="authInput"
+          value={newAccount ? "Create Account" : "Login"}
+        />
+        {error && <span className="authError">{error}</span>}
       </form>
       <span
         onClick={toggleAccount}
+        className="authSwitch"
         style={{ backgroundColor: "aqua", border: "solid" }}
       >
         {newAccount ? "sign in" : "sign up"}
       </span>
-      {error}
     </>
   );
 };
