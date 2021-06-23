@@ -2,7 +2,12 @@ import { authService, firebaseInstance } from "fbase";
 import React from "react";
 import AuthForm from "../components/AuthForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTwitter,faGoogle,faGithub, faGit } from "@fortawesome/free-brands-svg-icons";
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+  faGit,
+} from "@fortawesome/free-brands-svg-icons";
 const Auth = () => {
   const onSocialClick = async (event) => {
     const {
@@ -21,15 +26,15 @@ const Auth = () => {
   return (
     <div className="authContainer">
       <FontAwesomeIcon
-      icon={faTwitter}
-      color={"#04AAFF"}
-      size="3x"
-      style={{marginBottom:30}}
+        icon={faTwitter}
+        color={"#04AAFF"}
+        size="3x"
+        style={{ marginBottom: 30 }}
       />
       <AuthForm />
-      <div className="authBtn">
+      <div className="authBtns">
         <button onClick={onSocialClick} name="google" className="authBtn">
-          Continue with Google <FontAwesomeIcon icon={faGoogle}/>
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
         <button onClick={onSocialClick} name="github" className="authBtn">
           Continue with Github <FontAwesomeIcon icon={faGithub} />

@@ -48,7 +48,9 @@ const Mweet = ({ mweetObj, isOwner }) => {
             />
             <input type="submit" value="Update Mweet" className="formBtn" />
           </form>
-          <button onClick={toggleEditing} className="formBtn cancelBtn">cancel</button>
+          <button onClick={toggleEditing} className="formBtn cancelBtn">
+            cancel
+          </button>
         </>
       ) : (
         <>
@@ -56,12 +58,12 @@ const Mweet = ({ mweetObj, isOwner }) => {
           {mweetObj.attachmentUrl && <img src={mweetObj.attachmentUrl} />}
 
           {isOwner && (
-            <div>
-            <span onClick={onDeleteClick}>
-              <FontAwesomeIcon icon={faTrash} />
-            </span>
+            <div className="mweet__actions">
+              <span onClick={onDeleteClick}>
+                <FontAwesomeIcon icon={faTrash} />
+              </span>
               <span onClick={toggleEditing}>
-                <FontAwesomeIcon icon={faPencilAlt}/>
+                <FontAwesomeIcon icon={faPencilAlt} />
               </span>
             </div>
           )}
