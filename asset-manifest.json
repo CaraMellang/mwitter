@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/mwitter/static/css/main.625af296.chunk.css",
+    "main.css": "/mwitter/static/css/main.45ba3342.chunk.css",
     "main.js": "/mwitter/static/js/main.b2de59f4.chunk.js",
     "main.js.map": "/mwitter/static/js/main.b2de59f4.chunk.js.map",
     "runtime-main.js": "/mwitter/static/js/runtime-main.8dea4520.js",
@@ -8,13 +8,13 @@
     "static/js/2.aa71ed7d.chunk.js": "/mwitter/static/js/2.aa71ed7d.chunk.js",
     "static/js/2.aa71ed7d.chunk.js.map": "/mwitter/static/js/2.aa71ed7d.chunk.js.map",
     "index.html": "/mwitter/index.html",
-    "static/css/main.625af296.chunk.css.map": "/mwitter/static/css/main.625af296.chunk.css.map",
+    "static/css/main.45ba3342.chunk.css.map": "/mwitter/static/css/main.45ba3342.chunk.css.map",
     "static/js/2.aa71ed7d.chunk.js.LICENSE.txt": "/mwitter/static/js/2.aa71ed7d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8dea4520.js",
     "static/js/2.aa71ed7d.chunk.js",
-    "static/css/main.625af296.chunk.css",
+    "static/css/main.45ba3342.chunk.css",
     "static/js/main.b2de59f4.chunk.js"
   ]
 }
